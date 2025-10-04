@@ -5,7 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SLIM - A throwback instant messenger inspired by AOL Instant Messenger with classic 90s styling">
     <title>SLIM - Simple Live Instant Messenger</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #004880;
+            --secondary-color: #FFC20E;
+            --background-color: #D1D1D1;
+            --text-color: #212121;
+            --container-bg: #C0C0C0;
+            --border-style: 2px solid var(--text-color);
+            --shadow-light: inset -2px -2px 0px #888888, inset 2px 2px 0px #FFFFFF;
+            --shadow-dark: inset 2px 2px 0px #888888, inset -2px -2px 0px #FFFFFF;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,133 +25,211 @@
         }
 
         body {
-            font-family: 'Arial', 'Verdana', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1200px;
+            width: 90%;
+            max-width: 960px;
             margin: 0 auto;
             padding: 20px;
-            flex: 1;
         }
 
+        /* Header */
         header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
             text-align: center;
-            padding: 60px 20px 40px;
+            border-bottom: var(--border-style);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .logo {
-            font-size: 72px;
+            font-family: 'VT323', monospace;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 10px;
+            animation: run-animation 1s infinite alternate;
+        }
+
+        @keyframes run-animation {
+            from { transform: translateX(0); }
+            to { transform: translateX(10px); }
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M11 18.273l8.445 13.455-13.455-8.445L11 18.273zm3.545-3.546l13.455 8.445-8.445-13.455-5.01 5.01zm9.89-9.89l8.445-13.455L18.273 11l5.01-5.01zM50 12.5l5.01 5.01-13.455 8.445L50 12.5zm25.565 1.212l-13.455 8.445 5.01-5.01 8.445-3.435zM100 50l-5.01-5.01 8.445-13.455L100 50zm-1.212 25.565l8.445-13.455-5.01 5.01-3.435 8.445zM81.727 89L68.273 75.545l8.445 13.455L81.727 89zm-3.545 3.545l-13.455-8.445 8.445 13.455 5.01-5.01zM50 87.5l-5.01-5.01 13.455-8.445L50 87.5zm-25.565-1.212l13.455-8.445-5.01 5.01-8.445 3.435zM0 50l5.01 5.01-8.445 13.455L0 50zm1.212-25.565L-7.233 37.89l5.01-5.01L1.212 24.435z" fill-opacity="0.03" fill="%23000000"/></svg>'), var(--background-color);
+        }
+
+        .hero h1 {
+            font-family: 'VT323', monospace;
+            font-size: 4rem;
             margin-bottom: 10px;
         }
 
-        h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
         }
 
-        .tagline {
-            font-size: 20px;
-            opacity: 0.9;
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--text-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px 40px;
+            text-decoration: none;
+            border: var(--border-style);
+            box-shadow: var(--shadow-light);
+            transition: all 0.2s;
+        }
+
+        .cta-button:hover {
+            box-shadow: var(--shadow-dark);
+            transform: translate(2px, 2px);
+        }
+        .cta-button:active {
+            box-shadow: var(--shadow-dark);
+            transform: translate(2px, 2px);
+        }
+
+        /* Window-like sections */
+        .window {
+            background: var(--container-bg);
+            border: var(--border-style);
+            box-shadow: var(--shadow-light);
             margin-bottom: 40px;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+        .title-bar {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .feature {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
+        .title-bar-controls span {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: var(--container-bg);
+            border: 1px solid var(--text-color);
+            margin-left: 4px;
+            text-align: center;
+            line-height: 14px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .window-content {
             padding: 30px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
             text-align: center;
         }
 
         .feature-icon {
-            font-size: 48px;
+            font-size: 3rem;
             margin-bottom: 15px;
+            display: inline-block;
+            animation: icon-pop 0.5s ease-in-out;
         }
 
-        .feature h3 {
-            font-size: 24px;
+        @keyframes icon-pop {
+            0% { transform: scale(0.8); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .feature-card h3 {
+            font-family: 'VT323', monospace;
+            font-size: 1.8rem;
             margin-bottom: 10px;
         }
 
-        .feature p {
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-
-        .download-section {
-            text-align: center;
-            margin: 60px 0;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background: #FFC20E;
-            color: #000;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 18px 48px;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
-        }
-
-        .tech-stack {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
-            padding: 30px;
-            margin: 40px 0;
-        }
-
-        .tech-stack h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .tech-list {
+        /* How it Works */
+        .how-it-works-content {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            align-items: center;
+            gap: 40px;
+        }
+        .how-it-works-content > div {
+            flex: 1;
+        }
+        .how-it-works-content ol {
+            padding-left: 20px;
+        }
+        .how-it-works-content li {
+            margin-bottom: 15px;
+        }
+        .code-block {
+            background: #212121;
+            color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'VT323', monospace;
+            font-size: 1.1rem;
+            white-space: pre-wrap;
+            border: 2px solid #444;
         }
 
-        .tech-item {
-            background: rgba(255,255,255,0.2);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-        }
-
-        .screenshots {
-            margin: 60px 0;
-        }
-
-        .screenshots h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        /* Screenshots */
         .screenshot-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -147,21 +237,30 @@
         }
 
         .screenshot-placeholder {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 100px 20px;
+            border: 2px dashed var(--text-color);
+            padding: 60px 20px;
             text-align: center;
-            border: 2px dashed rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.05);
+            font-style: italic;
+            opacity: 0.7;
         }
 
+        /* Footer */
         footer {
             text-align: center;
             padding: 40px 20px;
-            background: rgba(0,0,0,0.2);
+            background: var(--container-bg);
+            border-top: var(--border-style);
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
         }
 
         footer a {
-            color: #FFC20E;
+            color: var(--primary-color);
+            font-weight: bold;
             text-decoration: none;
         }
 
@@ -170,128 +269,139 @@
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 36px;
-            }
-
-            .logo {
-                font-size: 48px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
+            .header-content { flex-direction: column; }
+            nav ul { margin-top: 15px; }
+            nav ul li { margin: 0 10px; }
+            .hero h1 { font-size: 3rem; }
+            .hero .tagline { font-size: 1.2rem; }
+            .how-it-works-content { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">🏃</div>
-            <h1>SLIM</h1>
-            <p class="tagline">Simple Live Instant Messenger - Bringing back the 90s, one message at a time</p>
-        </header>
 
-        <div class="download-section">
-            <a href="https://github.com/YOUR-USERNAME/SLIM/releases" class="download-btn">Download SLIM</a>
-            <p style="margin-top: 20px; opacity: 0.8;">Available for Windows, macOS, and Linux</p>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🏃</span>
+                SLIM
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="https://github.com/YOUR-USERNAME/SLIM" target="_blank">GitHub</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">💬</div>
-                <h3>Real-time Messaging</h3>
-                <p>Instant messaging powered by WebSocket technology for lightning-fast conversations</p>
+    <main class="container">
+        <section class="hero">
+            <h1>Simple Live Instant Messenger</h1>
+            <p class="tagline">A throwback to the golden age of instant messaging.</p>
+            <a href="https://github.com/YOUR-USERNAME/SLIM/releases" class="cta-button">Download Now</a>
+             <p style="margin-top: 20px; opacity: 0.8;">Free for Windows, macOS, and Linux</p>
+        </section>
+
+        <section id="features" class="window">
+            <div class="title-bar">
+                <span>[SLIM] Features</span>
+                <div class="title-bar-controls"><span>_</span><span>□</span><span>X</span></div>
             </div>
-
-            <div class="feature">
-                <div class="feature-icon">👥</div>
-                <h3>Buddy Lists</h3>
-                <p>See when your friends are online, away, or offline with classic status indicators</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">🎨</div>
-                <h3>90s Aesthetic</h3>
-                <p>Classic AIM-inspired interface with beveled buttons, retro colors, and nostalgic vibes</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">📝</div>
-                <h3>Away Messages</h3>
-                <p>Set custom away messages with templates or create your own</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">👤</div>
-                <h3>User Profiles</h3>
-                <p>Customize your profile with quotes, interests, location, and more</p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">🔒</div>
-                <h3>Secure & Private</h3>
-                <p>Self-hosted server with bcrypt password encryption and JWT authentication</p>
-            </div>
-        </div>
-
-        <div class="tech-stack">
-            <h2>Built With Modern Technology</h2>
-            <div class="tech-list">
-                <div class="tech-item">Python 3.10+</div>
-                <div class="tech-item">FastAPI</div>
-                <div class="tech-item">Socket.IO</div>
-                <div class="tech-item">SQLite</div>
-                <div class="tech-item">Eel</div>
-                <div class="tech-item">HTML/CSS/JavaScript</div>
-            </div>
-        </div>
-
-        <div class="screenshots">
-            <h2>Screenshots</h2>
-            <div class="screenshot-grid">
-                <div class="screenshot-placeholder">
-                    Login Screen<br>
-                    <small>(Add screenshot)</small>
-                </div>
-                <div class="screenshot-placeholder">
-                    Buddy List<br>
-                    <small>(Add screenshot)</small>
-                </div>
-                <div class="screenshot-placeholder">
-                    Chat Window<br>
-                    <small>(Add screenshot)</small>
-                </div>
-                <div class="screenshot-placeholder">
-                    User Profile<br>
-                    <small>(Add screenshot)</small>
+            <div class="window-content">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Real-time Chat</h3>
+                        <p>Lightning-fast, one-on-one conversations powered by WebSockets.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3>Buddy List</h3>
+                        <p>See who's Online, Away, or Offline with classic status indicators.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>90s Aesthetic</h3>
+                        <p>A nostalgic interface inspired by AIM, complete with retro sounds.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <h3>Away Messages</h3>
+                        <p>Let your friends know what you're up to when you're not around.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👤</div>
+                        <h3>User Profiles</h3>
+                        <p>Customize your profile with your favorite quotes, interests, and more.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Private & Secure</h3>
+                        <p>Self-host your server for complete control over your data.</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="download-section">
-            <h2 style="margin-bottom: 20px;">Getting Started</h2>
-            <ol style="text-align: left; max-width: 600px; margin: 0 auto; line-height: 2;">
-                <li>Download SLIM from GitHub</li>
-                <li>Install dependencies: <code style="background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px;">pip install -r requirements.txt</code></li>
-                <li>Start the server: <code style="background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px;">./start_server.sh</code></li>
-                <li>Launch the client: <code style="background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px;">./start_client.sh</code></li>
-                <li>Create an account and start chatting!</li>
-            </ol>
-        </div>
-    </div>
+        <section id="how-it-works" class="window">
+            <div class="title-bar">
+                <span>[SLIM] How It Works</span>
+                <div class="title-bar-controls"><span>_</span><span>□</span><span>X</span></div>
+            </div>
+            <div class="window-content how-it-works-content">
+                <div>
+                    <h3>Simple, Self-Hosted Setup</h3>
+                    <p>SLIM runs on your own machine, giving you a private and secure chat environment. It's built with modern, open-source technology.</p>
+                    <ol>
+                        <li><strong>Download</strong> the app and get the server running.</li>
+                        <li><strong>Launch</strong> the client and create your account.</li>
+                        <li><strong>Add</strong> your friends and start chatting!</li>
+                    </ol>
+                </div>
+                <div>
+                    <p>Getting started is easy. Just run these commands:</p>
+                    <div class="code-block">
+# 1. Install dependencies
+$ pip install -r requirements.txt
+
+# 2. Start the server
+$ ./start_server.sh
+
+# 3. Launch the client
+$ ./start_client.sh
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="screenshots" class="window">
+            <div class="title-bar">
+                <span>[SLIM] Screenshots</span>
+                <div class="title-bar-controls"><span>_</span><span>□</span><span>X</span></div>
+            </div>
+            <div class="window-content">
+                <div class="screenshot-grid">
+                    <div class="screenshot-placeholder">Login Screen</div>
+                    <div class="screenshot-placeholder">Buddy List</div>
+                    <div class="screenshot-placeholder">Chat Window</div>
+                    <div class="screenshot-placeholder">User Profile</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <footer>
         <p>
-            <a href="https://github.com/YOUR-USERNAME/SLIM" target="_blank">View on GitHub</a>
-            •
-            <a href="https://github.com/YOUR-USERNAME/SLIM/blob/main/README.md" target="_blank">Documentation</a>
-            •
-            <a href="https://github.com/YOUR-USERNAME/SLIM/issues" target="_blank">Report Issues</a>
+            <a href="https://github.com/YOUR-USERNAME/SLIM" target="_blank">View on GitHub</a> |
+            <a href="https://github.com/YOUR-USERNAME/SLIM/blob/main/README.md" target="_blank">Documentation</a> |
+            <a href="https://github.com/YOUR-USERNAME/SLIM/issues" target="_blank">Report an Issue</a>
         </p>
-        <p style="margin-top: 20px; opacity: 0.7;">
-            Made with ❤️ for the 90s nostalgia
-        </p>
+        <p>Made with  nostalgic 💛 and modern code.</p>
     </footer>
+
 </body>
 </html>
